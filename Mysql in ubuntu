@@ -1,0 +1,791 @@
+
+sudo mysql -u root
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 10
+Server version: 8.0.23-0ubuntu0.20.10.1 (Ubuntu)
+
+Copyright (c) 2000, 2021, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+4 rows in set (0.07 sec)
+
+mysql> set @@default_storage_engine = 'MyISAM';
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> create database StudentRecordWithMyISAM;
+Query OK, 1 row affected (3.16 sec)
+
+mysql> show databases;
++-------------------------+
+| Database                |
++-------------------------+
+| StudentRecordWithMyISAM |
+| information_schema      |
+| mysql                   |
+| performance_schema      |
+| sys                     |
++-------------------------+
+5 rows in set (0.00 sec)
+
+mysql> use StudentRecordWithMyISAM;
+Database changed
+mysql>  create table StudentRecordWithMyISAM (Id int, StudentName varchar(100),StudentAge int) ENGINE=MyISAM;
+Query OK, 0 rows affected (0.94 sec)
+
+mysql> desc  StudentRecordWithMyISAM;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| Id          | int          | YES  |     | NULL    |       |
+| StudentName | varchar(100) | YES  |     | NULL    |       |
+| StudentAge  | int          | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> show tables;
++-----------------------------------+
+| Tables_in_StudentRecordWithMyISAM |
++-----------------------------------+
+| StudentRecordWithMyISAM           |
++-----------------------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT TABLE_NAME,
+    -> ENGINE
+    -> FROM information_schema.TABLES
+    -> where TABLE_SCHEMA = 'business' and ENGINE = 'MyISAM';
+Empty set (0.00 sec)
+
+mysql> show tables;
++-----------------------------------+
+| Tables_in_StudentRecordWithMyISAM |
++-----------------------------------+
+| StudentRecordWithMyISAM           |
++-----------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select* from StudentRecordWithMyISAM;
+Empty set (0.01 sec)
+
+mysql> SELECT TABLE_NAME, ENGINE FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'business' and ENGINE = 'MyISAM';
+Empty set (0.00 sec)
+
+mysql> SELECT StudentRecordWithMyISAM, ENGINE FROM information_schema.TABLES WH
+ERE TABLE_SCHEMA = 'business' and ENGINE = 'MyISAM';
+ERROR 1054 (42S22): Unknown column 'StudentRecordWithMyISAM' in 'field list'
+mysql> SELECT TABLE_NAME, ENGINE FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'business' and ENGINE = 'MyISAM';
+Empty set (0.00 sec)
+
+mysql> select* from MyISAM;
+ERROR 1146 (42S02): Table 'StudentRecordWithMyISAM.MyISAM' doesn't exist
+mysql> Desc MyISAM;
+ERROR 1146 (42S02): Table 'StudentRecordWithMyISAM.MyISAM' doesn't exist
+mysql> SELECT TABLE_NAME,
+    -> ENGINE
+    -> FROM information_schema.TABLES
+    -> where TABLE_SCHEMA = 'business' and ENGINE = 'MyISAM';
+Empty set (0.00 sec)
+
+mysql> show databases;
++-------------------------+
+| Database                |
++-------------------------+
+| StudentRecordWithMyISAM |
+| information_schema      |
+| mysql                   |
+| performance_schema      |
+| sys                     |
++-------------------------+
+5 rows in set (0.01 sec)
+
+mysql> create database PavanWithMyISAM;
+Query OK, 1 row affected (0.11 sec)
+
+mysql> show databases;
++-------------------------+
+| Database                |
++-------------------------+
+| PavanWithMyISAM         |
+| StudentRecordWithMyISAM |
+| information_schema      |
+| mysql                   |
+| performance_schema      |
+| sys                     |
++-------------------------+
+6 rows in set (0.00 sec)
+
+mysql> use PavanWithMyISAM;
+Database changed
+mysql> create table PavanWithMyISAM(Id int,SName varchar(30), SAge int) ENGINE=MyISAM;
+Query OK, 0 rows affected (1.15 sec)
+
+mysql> desc PavanWithMyISAM;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| Id    | int         | YES  |     | NULL    |       |
+| SName | varchar(30) | YES  |     | NULL    |       |
+| SAge  | int         | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> show databases;
++-------------------------+
+| Database                |
++-------------------------+
+| PavanWithMyISAM         |
+| StudentRecordWithMyISAM |
+| information_schema      |
+| mysql                   |
+| performance_schema      |
+| sys                     |
++-------------------------+
+6 rows in set (0.00 sec)
+
+mysql> show tables;
++---------------------------+
+| Tables_in_PavanWithMyISAM |
++---------------------------+
+| PavanWithMyISAM           |
++---------------------------+
+1 row in set (0.00 sec)
+
+mysql> create database RajWithMyISAM;
+Query OK, 1 row affected (0.38 sec)
+
+mysql> show databases;
++-------------------------+
+| Database                |
++-------------------------+
+| PavanWithMyISAM         |
+| RajWithMyISAM           |
+| StudentRecordWithMyISAM |
+| information_schema      |
+| mysql                   |
+| performance_schema      |
+| sys                     |
++-------------------------+
+7 rows in set (0.01 sec)
+
+mysql> desc RajWithMyISAM;
+ERROR 1146 (42S02): Table 'PavanWithMyISAM.RajWithMyISAM' doesn't exist
+mysql> use RajWithMyISAM;
+Database changed
+mysql> create table RajWithMyISAM(Id int, SName varchar(30),SAge int)ENGINE=MyISAM;
+Query OK, 0 rows affected (0.19 sec)
+
+mysql> desc RajWithMyISAM;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| Id    | int         | YES  |     | NULL    |       |
+| SName | varchar(30) | YES  |     | NULL    |       |
+| SAge  | int         | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> show databases;
++-------------------------+
+| Database                |
++-------------------------+
+| PavanWithMyISAM         |
+| RajWithMyISAM           |
+| StudentRecordWithMyISAM |
+| information_schema      |
+| mysql                   |
+| performance_schema      |
+| sys                     |
++-------------------------+
+7 rows in set (0.00 sec)
+
+mysql> Create database Pavan;
+Query OK, 1 row affected (0.05 sec)
+
+mysql> use Pavan;
+Database changed
+mysql> create table Pavan(ID int not null auto_increment,
+    -> primary key(id),
+    -> data varchar(20) not null
+    -> ENGINE = MyISAM;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ENGINE = MyISAM' at line 4
+mysql> create table Pavan(
+    -> id INT NOT NULL AUTO_INCREMENT,
+    -> PRIMARY KEY (id),
+    -> data VARCHAR(20) NOT NULL
+    -> )ENGINE = MyISAM;
+Query OK, 0 rows affected (0.18 sec)
+
+mysql> desc Pavan;
++-------+-------------+------+-----+---------+----------------+
+| Field | Type        | Null | Key | Default | Extra          |
++-------+-------------+------+-----+---------+----------------+
+| id    | int         | NO   | PRI | NULL    | auto_increment |
+| data  | varchar(20) | NO   |     | NULL    |                |
++-------+-------------+------+-----+---------+----------------+
+2 rows in set (0.01 sec)
+
+mysql> create database kumar;
+Query OK, 1 row affected (0.05 sec)
+
+mysql> create table MyTable (
+    -> id int not null auto_increment,
+    -> primary key (id),
+    -> data varchar(20) not null
+    -> ) ENGINE = MYISAM;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> create table kumar(
+    -> id int not null auto_increment,
+    -> primary key(id),
+    -> data varchar(30) not null
+    -> )ENGINE MyISAM;
+Query OK, 0 rows affected (0.12 sec)
+
+mysql> insert into StudentRecordWithMyISAM(SID,SNAME,SAGE)values(1,'Rambo',20); 
+ERROR 1146 (42S02): Table 'Pavan.StudentRecordWithMyISAM' doesn't exist
+mysql> insert into StudentRecordWithMyISAM(SID,SNAME,SAGE)values(1,'Rambo','20');
+ERROR 1146 (42S02): Table 'Pavan.StudentRecordWithMyISAM' doesn't exist
+mysql> insert into StudentRecordWithMyISAM(SID,SNAME,SAGE)values(1,'Rambo','20');
+ERROR 1146 (42S02): Table 'Pavan.StudentRecordWithMyISAM' doesn't exist
+mysql> INSERT INTO StudentRecordWithMyISAM (id , studentname , studentage)values(1 , 'Nani' , '21');
+ERROR 1146 (42S02): Table 'Pavan.StudentRecordWithMyISAM' doesn't exist
+mysql> 
+mysql> desc kumar;
++-------+-------------+------+-----+---------+----------------+
+| Field | Type        | Null | Key | Default | Extra          |
++-------+-------------+------+-----+---------+----------------+
+| id    | int         | NO   | PRI | NULL    | auto_increment |
+| data  | varchar(30) | NO   |     | NULL    |                |
++-------+-------------+------+-----+---------+----------------+
+2 rows in set (0.00 sec)
+
+mysql> desc pavan;
+ERROR 1146 (42S02): Table 'Pavan.pavan' doesn't exist
+mysql> use StudentRecordWithMyISAM;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> desc pavan;
+ERROR 1146 (42S02): Table 'StudentRecordWithMyISAM.pavan' doesn't exist
+mysql> desc kumar;
+ERROR 1146 (42S02): Table 'StudentRecordWithMyISAM.kumar' doesn't exist
+mysql> INSERT INTO StudentRecordWithMyISAM (id , studentname , studentage)values(1 , 'Nani' , '21');
+Query OK, 1 row affected (0.09 sec)
+
+mysql> INSERT INTO StudentRecordWithMyISAM (id , studentname , studentage)values(2 , 'Rambo' , '22');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO StudentRecordWithMyISAM (id , studentname , studentage)values(3 , 'Cena' , '25');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> INSERT INTO StudentRecordWithMyISAM (id , studentname , studentage)values(4 , 'Rebal' , '26');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> INSERT INTO StudentRecordWithMyISAM (id , studentname , studentage)values(5 , 'Dangal' , '27');
+Query OK, 1 row affected (0.08 sec)
+
+mysql> INSERT INTO StudentRecordWithMyISAM (id , studentname , studentage)values(6 , 'Sulthan' , '28');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO StudentRecordWithMyISAM (id , studentname , studentage)values(7 , 'Thor' , '28');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO StudentRecordWithMyISAM (id , studentname , studentage)values(8 , 'THunder' , '29');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> INSERT INTO StudentRecordWithMyISAM (id , studentname , studentage)values(9 , 'Hulk' , '30');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO StudentRecordWithMyISAM (id , studentname , studentage)values(10 , 'Ironman' , '31');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> INSERT INTO StudentRecordWithMyISAM (id , studentname , studentage)values(11 , 'Wolverine' , '32');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO StudentRecordWithMyISAM (id , studentname , studentage)values(12 , 'X-men' , '33');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO StudentRecordWithMyISAM (id , studentname , studentage)values(13 , 'Black Panther' , '34');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO StudentRecordWithMyISAM (id , studentname , studentage)values(14 , 'Tiger' , '35');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO StudentRecordWithMyISAM (id , studentname , studentage)values(15 , 'Sam' , '36');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select * from StudentRecordWithMyISAM;
++------+---------------+------------+
+| Id   | StudentName   | StudentAge |
++------+---------------+------------+
+|    1 | Nani          |         21 |
+|    2 | Rambo         |         22 |
+|    3 | Cena          |         25 |
+|    4 | Rebal         |         26 |
+|    5 | Dangal        |         27 |
+|    6 | Sulthan       |         28 |
+|    7 | Thor          |         28 |
+|    8 | THunder       |         29 |
+|    9 | Hulk          |         30 |
+|   10 | Ironman       |         31 |
+|   11 | Wolverine     |         32 |
+|   12 | X-men         |         33 |
+|   13 | Black Panther |         34 |
+|   14 | Tiger         |         35 |
+|   15 | Sam           |         36 |
++------+---------------+------------+
+15 rows in set (0.00 sec)
+
+mysql> show databases;
++-------------------------+
+| Database                |
++-------------------------+
+| Pavan                   |
+| PavanWithMyISAM         |
+| RajWithMyISAM           |
+| StudentRecordWithMyISAM |
+| information_schema      |
+| kumar                   |
+| mysql                   |
+| performance_schema      |
+| sys                     |
++-------------------------+
+9 rows in set (0.00 sec)
+
+mysql> use PavanWithMyISAM;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> show tables;
++---------------------------+
+| Tables_in_PavanWithMyISAM |
++---------------------------+
+| PavanWithMyISAM           |
++---------------------------+
+1 row in set (0.00 sec)
+
+mysql> desc PavanWithMyISAM;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| Id    | int         | YES  |     | NULL    |       |
+| SName | varchar(30) | YES  |     | NULL    |       |
+| SAge  | int         | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> insert into PavanWithMyISAM (Id,SNAME,SAge)values(01,'Nagadri','24');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into PavanWithMyISAM (Id,SNAME,SAge)values(02,'Raj','23');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into PavanWithMyISAM (Id,SNAME,SAge)values(03,'Guru','22');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into PavanWithMyISAM (Id,SNAME,SAge)values(04,'Bhaskar','24');
+Query OK, 1 row affected (0.14 sec)
+
+mysql> insert into PavanWithMyISAM (Id,SNAME,SAge)values(05,'Pavan','21');
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into PavanWithMyISAM (Id,SNAME,SAge)values(06,'Jaya','25');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into PavanWithMyISAM (Id,SNAME,SAge)values(07,'Nagadri','26');
+Query OK, 1 row affected (0.23 sec)
+
+mysql> insert into PavanWithMyISAM (Id,SNAME,SAge)values(08,'Ramesh','36');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select* from PavanWithMyISAM;
++------+---------+------+
+| Id   | SName   | SAge |
++------+---------+------+
+|    1 | Nagadri |   24 |
+|    2 | Raj     |   23 |
+|    3 | Guru    |   22 |
+|    4 | Bhaskar |   24 |
+|    5 | Pavan   |   21 |
+|    6 | Jaya    |   25 |
+|    7 | Nagadri |   26 |
+|    8 | Ramesh  |   36 |
++------+---------+------+
+8 rows in set (0.00 sec)
+
+mysql> show databases;
++-------------------------+
+| Database                |
++-------------------------+
+| Pavan                   |
+| PavanWithMyISAM         |
+| RajWithMyISAM           |
+| StudentRecordWithMyISAM |
+| information_schema      |
+| kumar                   |
+| mysql                   |
+| performance_schema      |
+| sys                     |
++-------------------------+
+9 rows in set (0.00 sec)
+
+mysql> create database Raj;
+Query OK, 1 row affected (0.11 sec)
+
+mysql> show databases;
++-------------------------+
+| Database                |
++-------------------------+
+| Pavan                   |
+| PavanWithMyISAM         |
+| Raj                     |
+| RajWithMyISAM           |
+| StudentRecordWithMyISAM |
+| information_schema      |
+| kumar                   |
+| mysql                   |
+| performance_schema      |
+| sys                     |
++-------------------------+
+10 rows in set (0.00 sec)
+
+mysql> use Raj;
+Database changed
+mysql> create table Raj(Id int, StudentName varchar(30),StudentAge int)ENGINE=MyISAM;
+Query OK, 0 rows affected (1.48 sec)
+
+mysql> show tables;
++---------------+
+| Tables_in_Raj |
++---------------+
+| Raj           |
++---------------+
+1 row in set (0.01 sec)
+
+mysql> insert into Raj (Id,StudentName,StudentAge)values(001,'Tiger','20');
+Query OK, 1 row affected (0.12 sec)
+
+mysql> insert into Raj (Id,StudentName,StudentAge)values(002,'Lion','21');
+Query OK, 1 row affected (0.28 sec)
+
+mysql> insert into Raj (Id,StudentName,StudentAge)values(003,'Bear','22');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into Raj (Id,StudentName,StudentAge)values(004,'Leopard','23');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Raj (Id,StudentName,StudentAge)values(004,'Cheetah','24');
+Query OK, 1 row affected (0.72 sec)
+
+mysql> insert into Raj (Id,StudentName,StudentAge)values(005,'Panther','25');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into Raj (Id,StudentName,StudentAge)values(006,'Deer','26');
+Query OK, 1 row affected (0.11 sec)
+
+mysql> insert into Raj (Id,StudentName,StudentAge)values(007,'Mowgli','27');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select* from Raj;
++------+-------------+------------+
+| Id   | StudentName | StudentAge |
++------+-------------+------------+
+|    1 | Tiger       |         20 |
+|    2 | Lion        |         21 |
+|    3 | Bear        |         22 |
+|    4 | Leopard     |         23 |
+|    4 | Cheetah     |         24 |
+|    5 | Panther     |         25 |
+|    6 | Deer        |         26 |
+|    7 | Mowgli      |         27 |
++------+-------------+------------+
+8 rows in set (0.00 sec)
+
+mysql> desc Raj;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| Id          | int         | YES  |     | NULL    |       |
+| StudentName | varchar(30) | YES  |     | NULL    |       |
+| StudentAge  | int         | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> show tables;
++---------------+
+| Tables_in_Raj |
++---------------+
+| Raj           |
++---------------+
+1 row in set (0.01 sec)
+
+mysql> show databases;
++-------------------------+
+| Database                |
++-------------------------+
+| Pavan                   |
+| PavanWithMyISAM         |
+| Raj                     |
+| RajWithMyISAM           |
+| StudentRecordWithMyISAM |
+| information_schema      |
+| kumar                   |
+| mysql                   |
+| performance_schema      |
+| sys                     |
++-------------------------+
+10 rows in set (0.00 sec)
+
+mysql> use StudentRecordWithMyISAM;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> select* from StudentWithMyISAM;
+ERROR 1146 (42S02): Table 'StudentRecordWithMyISAM.StudentWithMyISAM' doesn't exist
+mysql> show tables;
++-----------------------------------+
+| Tables_in_StudentRecordWithMyISAM |
++-----------------------------------+
+| StudentRecordWithMyISAM           |
++-----------------------------------+
+1 row in set (0.00 sec)
+
+mysql> Select* from StudentRecordWithMyISAM;
++------+---------------+------------+
+| Id   | StudentName   | StudentAge |
++------+---------------+------------+
+|    1 | Nani          |         21 |
+|    2 | Rambo         |         22 |
+|    3 | Cena          |         25 |
+|    4 | Rebal         |         26 |
+|    5 | Dangal        |         27 |
+|    6 | Sulthan       |         28 |
+|    7 | Thor          |         28 |
+|    8 | THunder       |         29 |
+|    9 | Hulk          |         30 |
+|   10 | Ironman       |         31 |
+|   11 | Wolverine     |         32 |
+|   12 | X-men         |         33 |
+|   13 | Black Panther |         34 |
+|   14 | Tiger         |         35 |
+|   15 | Sam           |         36 |
++------+---------------+------------+
+15 rows in set (0.00 sec)
+
+mysql> alter table StudentRecordWithMyISAM ENGINE=InnoDB;
+Query OK, 15 rows affected (0.38 sec)
+Records: 15  Duplicates: 0  Warnings: 0
+
+mysql> show create table StudentRecordWIthMyISAM;
+ERROR 1146 (42S02): Table 'StudentRecordWithMyISAM.StudentRecordWIthMyISAM' doesn't exist
+mysql> show create table StudentRecordWIthMyISAM;
+ERROR 1146 (42S02): Table 'StudentRecordWithMyISAM.StudentRecordWIthMyISAM' doesn't exist
+mysql> select* from StudentRecordWithMyISAM;
++------+---------------+------------+
+| Id   | StudentName   | StudentAge |
++------+---------------+------------+
+|    1 | Nani          |         21 |
+|    2 | Rambo         |         22 |
+|    3 | Cena          |         25 |
+|    4 | Rebal         |         26 |
+|    5 | Dangal        |         27 |
+|    6 | Sulthan       |         28 |
+|    7 | Thor          |         28 |
+|    8 | THunder       |         29 |
+|    9 | Hulk          |         30 |
+|   10 | Ironman       |         31 |
+|   11 | Wolverine     |         32 |
+|   12 | X-men         |         33 |
+|   13 | Black Panther |         34 |
+|   14 | Tiger         |         35 |
+|   15 | Sam           |         36 |
++------+---------------+------------+
+15 rows in set (0.00 sec)
+
+mysql> show create table StudentRecordWithMyISAM;
++-------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Table                   | Create Table                                                                                                                                                                                                    |
++-------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| StudentRecordWithMyISAM | CREATE TABLE `StudentRecordWithMyISAM` (
+  `Id` int DEFAULT NULL,
+  `StudentName` varchar(100) DEFAULT NULL,
+  `StudentAge` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci |
++-------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> show datatables;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatables' at line 1
+mysql> show databases;
++-------------------------+
+| Database                |
++-------------------------+
+| Pavan                   |
+| PavanWithMyISAM         |
+| Raj                     |
+| RajWithMyISAM           |
+| StudentRecordWithMyISAM |
+| information_schema      |
+| kumar                   |
+| mysql                   |
+| performance_schema      |
+| sys                     |
++-------------------------+
+10 rows in set (0.00 sec)
+
+mysql> select* from Pavan;
+ERROR 1146 (42S02): Table 'StudentRecordWithMyISAM.Pavan' doesn't exist
+mysql> use Pavan;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> select* from Pavan;
+Empty set (0.00 sec)
+
+mysql> show tables;
++-----------------+
+| Tables_in_Pavan |
++-----------------+
+| MyTable         |
+| Pavan           |
+| kumar           |
++-----------------+
+3 rows in set (0.01 sec)
+
+mysql> select* from kumar;
+Empty set (0.00 sec)
+
+mysql> use Raj;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> select* from Raj;
++------+-------------+------------+
+| Id   | StudentName | StudentAge |
++------+-------------+------------+
+|    1 | Tiger       |         20 |
+|    2 | Lion        |         21 |
+|    3 | Bear        |         22 |
+|    4 | Leopard     |         23 |
+|    4 | Cheetah     |         24 |
+|    5 | Panther     |         25 |
+|    6 | Deer        |         26 |
+|    7 | Mowgli      |         27 |
++------+-------------+------------+
+8 rows in set (0.00 sec)
+
+mysql> alter table Raj ENGINE=InnoDb;
+Query OK, 8 rows affected (0.45 sec)
+Records: 8  Duplicates: 0  Warnings: 0
+
+mysql> show create table Raj;
++-------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Table | Create Table                                                                                                                                                                               |
++-------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Raj   | CREATE TABLE `Raj` (
+  `Id` int DEFAULT NULL,
+  `StudentName` varchar(30) DEFAULT NULL,
+  `StudentAge` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci |
++-------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> show tables;
++---------------+
+| Tables_in_Raj |
++---------------+
+| Raj           |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> show table status from RAaj;
+ERROR 1049 (42000): Unknown database 'RAaj'
+mysql> show table status from Raj;
++------+--------+---------+------------+------+----------------+-------------+-----------------+--------------+-----------+----------------+---------------------+-------------+------------+--------------------+----------+----------------+---------+
+| Name | Engine | Version | Row_format | Rows | Avg_row_length | Data_length | Max_data_length | Index_length | Data_free | Auto_increment | Create_time         | Update_time | Check_time | Collation          | Checksum | Create_options | Comment |
++------+--------+---------+------------+------+----------------+-------------+-----------------+--------------+-----------+----------------+---------------------+-------------+------------+--------------------+----------+----------------+---------+
+| Raj  | InnoDB |      10 | Dynamic    |    8 |           2048 |       16384 |               0 |            0 |         0 |              1 | 2021-02-25 15:24:14 | NULL        | NULL       | utf8mb4_0900_ai_ci |     NULL |                |         |
++------+--------+---------+------------+------+----------------+-------------+-----------------+--------------+-----------+----------------+---------------------+-------------+------------+--------------------+----------+----------------+---------+
+1 row in set (0.03 sec)
+
+mysql> show databases;
++-------------------------+
+| Database                |
++-------------------------+
+| Pavan                   |
+| PavanWithMyISAM         |
+| Raj                     |
+| RajWithMyISAM           |
+| StudentRecordWithMyISAM |
+| information_schema      |
+| kumar                   |
+| mysql                   |
+| performance_schema      |
+| sys                     |
++-------------------------+
+10 rows in set (0.00 sec)
+
+mysql> use kumar;
+Database changed
+mysql> show databases;
++-------------------------+
+| Database                |
++-------------------------+
+| Pavan                   |
+| PavanWithMyISAM         |
+| Raj                     |
+| RajWithMyISAM           |
+| StudentRecordWithMyISAM |
+| information_schema      |
+| kumar                   |
+| mysql                   |
+| performance_schema      |
+| sys                     |
++-------------------------+
+10 rows in set (0.00 sec)
+
+mysql> show tables;
+Empty set (0.00 sec)
+
+mysql> use PavanWithMyISAM;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> show tables;
++---------------------------+
+| Tables_in_PavanWithMyISAM |
++---------------------------+
+| PavanWithMyISAM           |
++---------------------------+
+1 row in set (0.00 sec)
+
+mysql> show Table status from PavanWithMyISAM;
++-----------------+--------+---------+------------+------+----------------+-------------+-----------------+--------------+-----------+----------------+---------------------+---------------------+------------+--------------------+----------+----------------+---------+
+| Name            | Engine | Version | Row_format | Rows | Avg_row_length | Data_length | Max_data_length | Index_length | Data_free | Auto_increment | Create_time         | Update_time         | Check_time | Collation          | Checksum | Create_options | Comment |
++-----------------+--------+---------+------------+------+----------------+-------------+-----------------+--------------+-----------+----------------+---------------------+---------------------+------------+--------------------+----------+----------------+---------+
+| PavanWithMyISAM | MyISAM |      10 | Dynamic    |    8 |             21 |         172 | 281474976710655 |         1024 |         0 |              1 | 2021-02-25 12:53:38 | 2021-02-25 14:04:00 | NULL       | utf8mb4_0900_ai_ci |     NULL |                |         |
++-----------------+--------+---------+------------+------+----------------+-------------+-----------------+--------------+-----------+----------------+---------------------+---------------------+------------+--------------------+----------+----------------+---------+
+1 row in set (0.02 sec)
+
+
+
